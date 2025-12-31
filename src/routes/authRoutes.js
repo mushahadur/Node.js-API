@@ -7,16 +7,17 @@ const { registerValidation, loginValidation, validate } = require('../validators
 // Registration route
 router.post('/register', registerValidation, validate, authController.register);
 // Email verification route
-router.get('/verify-email/:token', authController.verifyEmail);
+router.post('/verify-email', authController.verifyEmail);
 // Login route
 router.post('/login', loginValidation, validate, authController.login);
 
 // Forgot password route
 router.post('/forgot-password', authController.forgotPassword);
-// Verify reset token route
-router.get('/reset-password/:token', authController.verifyResetToken);
+// Verify OTP route
+router.post('/verify-otp', authController.verifyOTP);
 // Reset password route
 router.post('/reset-password', authController.resetPassword);
+
 
 module.exports = router;
 

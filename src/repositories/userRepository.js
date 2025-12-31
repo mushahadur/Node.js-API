@@ -27,36 +27,51 @@ class UserRepository {
             userId,
             { 
                 isEmailVerified: status,
-                verificationToken: null,
-                verificationTokenExpires: null 
+                verificationOTP: null,
+                verificationOTPExpires: null 
             },
             { new: true }
         );
     }
     
-    async findByVerificationToken(token) {
+    async findByVerificationOTP(otp) {
         return await User.findOne({
-            verificationToken: token,
-            verificationTokenExpires: { $gt: Date.now() }
+            verificationOTP: otp,
+            verificationOTPExpires: { $gt: Date.now() }
         });
     }
     
     // NEW METHODS for Password Reset
-    async savePasswordResetToken(userId, token, expires) {
+    async saveOtpForResetPassword(userId, otp, expires) {
+        return await User.findByIdAndUpdate(
+            userId,
+            {
+                verificationOTP: otp,
+                verificationOTPExpires: expires
+            },
+            { new: true }
+        );
+    }
+
+    // NEW METHODS for Save Token Password Reset
+    async updateTokenOtpForResetPassword(userId, token, expires) {
         return await User.findByIdAndUpdate(
             userId,
             {
                 passwordResetToken: token,
-                passwordResetTokenExpires: expires
+                passwordResetTokenExpires: expires,
+                verificationOTP: null,
+                verificationOTPExpires: null 
             },
             { new: true }
         );
     }
     
-    async findByPasswordResetToken(token) {
+
+     async findByVerificationToken(token) {
         return await User.findOne({
-            passwordResetToken: token,
-            passwordResetTokenExpires: { $gt: Date.now() }
+        passwordResetToken: token,
+        passwordResetTokenExpires: { $gt: Date.now() }
         });
     }
     

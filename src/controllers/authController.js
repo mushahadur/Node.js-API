@@ -33,10 +33,10 @@ class AuthController {
     
     async verifyEmail(req, res) {
         try {
-            const { token } = req.params;
-            
+            const { otp } = req.body;
+            // return otp;
             // Call service
-            const result = await authService.verifyEmail(token);
+            const result = await authService.verifyEmail(otp);
             
             // Send response
             res.status(200).json({
@@ -110,12 +110,12 @@ class AuthController {
         }
     }
     
-    // NEW ENDPOINT 2: Verify Reset Token (Optional but recommended)
-    async verifyResetToken(req, res) {
+    // NEW ENDPOINT 2: Verify OTP (Optional but recommended)
+    async verifyOTP(req, res) {
         try {
-            const { token } = req.params;
+            const { otp } = req.body;
             
-            const result = await authService.verifyResetToken(token);
+            const result = await authService.verifyOTP(otp);
             
             res.status(200).json({
                 success: true,
