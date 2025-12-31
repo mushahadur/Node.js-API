@@ -20,15 +20,19 @@ To install and set up the project locally, follow these steps:
 
 1.  **Clone the repository:**
     ```bash
-    git clone github.com
-    cd your-repository-name
-    ```
+    git clone [github.com](https://github.com/mushahadur/Node.js-API.git)
+    cd Node.js-API
 
-2.  **Install dependencies using npm (Node Package Manager):**
+2.  **Setup .ENV file:**
     ```bash
-    npm install
+    .env
+    ``````
+
+3.  **Install dependencies using pnpm ( Performant Node Package Manager):**
+    ```bash
+    pnpm install
     ```
-    *(Note: Node.js and npm must be installed on your system)*.
+    *(Note: Node.js and pnpm must be installed on your system)*.
 
 ## Usage
 
@@ -40,4 +44,4 @@ To run the application, use the following command:
 ```bash
 node index.js
 # or if using a start script
-npm start
+pnpm dev
