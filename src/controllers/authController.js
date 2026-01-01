@@ -83,6 +83,17 @@ class AuthController {
         }
     }
 
+    //Logout
+       async logout(req, res) {
+        try {
+            const token = req.headers.authorization.split(' ')[1];
+            const result = await authService.logout(token);
+            res.json(result);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    }
+
     // NEW ENDPOINT 1: Request Password Reset
     async forgotPassword(req, res) {
         try {
