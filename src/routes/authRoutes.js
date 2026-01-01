@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
 const { registerValidation, loginValidation, validate } = require('../validators/authValidator');
+const auth = require('../middlewares/auth');
 
 
 // Registration route
@@ -17,6 +18,9 @@ router.post('/forgot-password', authController.forgotPassword);
 router.post('/verify-otp', authController.verifyOTP);
 // Reset password route
 router.post('/reset-password', authController.resetPassword);
+
+// Logout route (protected route - logged in user only)
+router.post('/logout', auth, authController.logout);
 
 
 module.exports = router;

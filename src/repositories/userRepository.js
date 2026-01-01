@@ -4,6 +4,7 @@
 // ============================================
 
 const User = require('../models/User');
+const BlacklistedToken = require('../models/BlacklistedToken');
 
 class UserRepository {
     // Just Database queries - No business logic
@@ -85,6 +86,14 @@ class UserRepository {
             },
             { new: true }
         );
+    }
+    
+     async addToBlacklist(token, expiresAt) {
+        return BlacklistedToken.create({ token, expiresAt });
+    }
+
+    async isBlacklisted(token) {
+        return BlacklistedToken.findOne({ token });
     }
 
 }

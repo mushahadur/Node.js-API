@@ -118,6 +118,18 @@ class AuthService {
         };
     }
 
+    //Logout 
+    async logout(token) {
+        const decoded = tokenService.verifyJWT(token);
+
+        await userRepository.addToBlacklist(
+            token,
+            new Date(decoded.exp * 1000)
+        );
+
+        return { message: 'Logout successful' };
+    }
+
     // NEW METHOD 1: Request Password Reset
     async requestPasswordReset(email) {
         // Find user by email
