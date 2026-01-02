@@ -12,8 +12,18 @@ const userSchema = new mongoose.Schema({
     
     // Password reset - New fields
     passwordResetToken: { type: String },
-    passwordResetTokenExpires: { type: Date }
+    passwordResetTokenExpires: { type: Date },
+    
+     // Role relationship
+    roleId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Role', // Reference to Role collection
+      default: null,
+    },
+
     
 }, { timestamps: true });
+
+
 
 module.exports = mongoose.model('User', userSchema);

@@ -223,6 +223,11 @@ class AuthService {
             message: 'Password reset successful. You can now login with your new password.'
         };
     }
+
+    // Get all users
+      async getAllUsers() {
+        return userRepository.findAll();
+    }
 }
 
 module.exports = new AuthService();

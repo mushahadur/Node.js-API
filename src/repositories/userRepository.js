@@ -16,6 +16,27 @@ class UserRepository {
     async findById(id) {
         return await User.findById(id);
     }
+
+      async findAll() {
+        return await User.find()
+        .select('-password')
+        .populate({
+            path: 'roleId',
+            select: 'name permissions',
+            populate: {
+            path: 'permissions',
+            select: 'name'
+            }
+        });
+    }
+
+    // async findByIdWithRole(id) {
+    //     console.log('Finding user with role...');
+    // return User.findById(id).populate({
+    //     path: 'roleId',
+    //     populate: { path: 'permissions' }
+    // });
+    // }
     
     async create(userData) {
         const user = new User(userData);
