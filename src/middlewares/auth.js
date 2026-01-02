@@ -30,6 +30,8 @@ const auth = async (req, res, next) => {
 
         // Step 5: Get user from database
         const user = await userRepository.findById(decoded.userId);
+        // const user = await userRepository.findByIdWithRole(decoded.userId);
+
 
         if (!user) {
             return res.status(401).json({
